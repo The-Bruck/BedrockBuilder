@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: unzip -q BedrockBuilder.zip
+      - name: Patch missing import
+        run: |
+          sed -i 's/^import androidx.compose.ui.graphics.drawscope.drawIntoCanvas$/import androidx.compose.ui.graphics.drawscope.drawIntoCanvas\nimport androidx.compose.ui.graphics.nativeCanvas/' BedrockBuilder/app/src/main/java/com/bedrockbuilder/ui/BuildCanvas.kt
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
